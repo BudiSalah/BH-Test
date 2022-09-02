@@ -64,7 +64,7 @@ function TextInput({
         value={state}
         onInput={(e) => stateHandler(e.target.value)}
         onPaste={pasteHandler}
-        disabled={state?.length > 79}
+        disabled={state?.length > MAX_LENGTH - 1}
       />
 
       <span className={`${validationColor}`}>
