@@ -1,45 +1,44 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { MainContext } from '../MainContext';
 import Section from '../UI/Section';
 
 function Graph({ className }) {
+  const resultChart = useRef();
+
   const { question, answers, createPoll, votes } = useContext(MainContext);
 
-  const [options, setOptions] = useState({
-    chart: {
-      id: 'apexchart-example',
-    },
-    xaxis: {
-      categories: answers,
-    },
-  });
+  const [options, setOptions] = useState({});
 
-  const [series, setSeries] = useState([
-    {
-      name: 'series-1',
-      data: votes.map((item) => item.count),
-    },
-  ]);
+  const [series, setSeries] = useState([]);
 
   const [totalVotes, setTotalVotes] = useState(NaN);
 
   useEffect(() => {
-    setOptions({
-      chart: {
-        id: 'apexchart-example',
-      },
-      xaxis: {
-        categories: answers,
-      },
+    setOptions(() => {
+      return {
+        chart: {
+          id: 'apexchart-example',
+        },
+        xaxis: {
+          categories: answers,
+        },
+      };
     });
 
-    setSeries([
-      {
-        name: 'series-1',
-        data: votes.map((item) => item.count),
-      },
-    ]);
+    resultChart?.current?.chart?.updateOptions(options);
+    // eslint-disable-next-line
+  }, [answers]);
+
+  useEffect(() => {
+    setSeries(() => {
+      return [
+        {
+          name: 'series-1',
+          data: votes.map((item) => item.count),
+        },
+      ];
+    });
 
     setTotalVotes((oldVal) => {
       if (votes?.length) {
@@ -50,7 +49,7 @@ function Graph({ className }) {
 
       return oldVal;
     });
-  }, [answers, votes]);
+  }, [votes]);
 
   return (
     <Section
@@ -60,7 +59,13 @@ function Graph({ className }) {
         <>
           <h2>{question}</h2>
 
-          <Chart options={options} series={series} type="bar" height={320} />
+          <Chart
+            ref={resultChart}
+            options={options}
+            series={series}
+            type="bar"
+            height={320}
+          />
 
           <p className="capitalize">total votes: {totalVotes}</p>
         </>
