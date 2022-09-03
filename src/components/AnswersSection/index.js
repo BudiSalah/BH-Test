@@ -7,8 +7,14 @@ function AnswersSection({ className }) {
   const answerInput = useRef();
   const answersList = useRef();
 
-  const { question, setQuestion, answers, setAnswers } =
-    useContext(MainContext);
+  const {
+    question,
+    setQuestion,
+    answers,
+    setAnswers,
+    createPoll,
+    setCreatePoll,
+  } = useContext(MainContext);
 
   const [answer, setAnswer] = useState('');
   const [targetIndex, setTargetIndex] = useState(NaN);
@@ -89,6 +95,7 @@ function AnswersSection({ className }) {
   function resetPoll() {
     setQuestion('');
     setAnswers([]);
+    setCreatePoll(false);
   }
 
   useEffect(() => {
@@ -98,6 +105,8 @@ function AnswersSection({ className }) {
   return (
     <div className={`${className} mt-8 flex flex-col gap-2`}>
       <h2>Answers</h2>
+
+      <pre>createPoll: {String(createPoll)}</pre>
 
       <ul
         ref={answersList}
@@ -147,6 +156,15 @@ function AnswersSection({ className }) {
           </>
         )}
       </section>
+
+      {answers?.length > 1 && !createPoll && (
+        <button
+          className="border border-gray-300 bg-gray-300 px-4 py-1 uppercase"
+          onClick={() => setCreatePoll(true)}
+        >
+          create
+        </button>
+      )}
     </div>
   );
 }
