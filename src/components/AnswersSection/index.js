@@ -81,6 +81,13 @@ function AnswersSection({ className }) {
   function addAnswer() {
     if (!answer) return;
 
+    const exists = answers.some((item) => item === answer);
+
+    if (exists) {
+      alert('This answer already exists!');
+      return;
+    }
+
     if (answer?.length <= INPUT_MAX_LENGTH) {
       setAnswers((oldVal) => {
         return [...oldVal, answer];
