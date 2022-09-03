@@ -6,6 +6,7 @@ function MainProvider({ children }) {
   const [question, setQuestion] = useState('');
   const [answers, setAnswers] = useState([]);
   const [createPoll, setCreatePoll] = useState(false);
+  const [votes, setVotes] = useState([]);
 
   const defaultObj = {
     question,
@@ -14,6 +15,8 @@ function MainProvider({ children }) {
     setAnswers,
     createPoll,
     setCreatePoll,
+    votes,
+    setVotes,
   };
 
   return (

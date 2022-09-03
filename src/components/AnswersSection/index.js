@@ -106,8 +106,6 @@ function AnswersSection({ className }) {
     <div className={`${className} mt-8 flex flex-col gap-2`}>
       <h2>Answers</h2>
 
-      <pre>createPoll: {String(createPoll)}</pre>
-
       <ul
         ref={answersList}
         className="flex w-full list-disc flex-col gap-2 px-8"
