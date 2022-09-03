@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import { MainContext } from '../MainContext';
 import Section from '../UI/Section';
 
-function Vote() {
+function Vote({ className }) {
   const radioAnswers = useRef();
 
   const { question, answers, createPoll, setVotes } = useContext(MainContext);
@@ -50,13 +50,15 @@ function Vote() {
   }, [question, answers]);
 
   return (
-    <Section className="flex flex-col flex-wrap items-stretch justify-between gap-2">
+    <Section
+      className={`${className} flex flex-col flex-wrap items-stretch justify-between gap-2`}
+    >
       <div className="flex flex-col flex-wrap gap-2">
         <h2>Vote</h2>
 
         {createPoll ? (
           <div className="flex flex-col gap-2">
-            <h3>{question}</h3>
+            <h3 className="text-bold font-bold capitalize">{question}</h3>
 
             <ul
               ref={radioAnswers}
@@ -67,16 +69,20 @@ function Vote() {
                 return (
                   <li
                     key={`radio_answer_${index}`}
-                    className="flex cursor-pointer flex-row items-center gap-1"
+                    className="flex flex-row items-center gap-1"
                   >
                     <input
                       type="radio"
                       name="answer"
                       id={item.replace(/\s/g, '-') + '-' + index}
                       value={item}
+                      className="cursor-pointer"
                     />
 
-                    <label htmlFor={item.replace(/\s/g, '-') + '-' + index}>
+                    <label
+                      htmlFor={item.replace(/\s/g, '-') + '-' + index}
+                      className="cursor-pointer text-lg capitalize"
+                    >
                       {item}
                     </label>
                   </li>

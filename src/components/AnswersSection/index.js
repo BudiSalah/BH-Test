@@ -59,7 +59,7 @@ function AnswersSection({ className }) {
       return (
         <li
           key={`answer_${index}`}
-          className={`${className} flex flex-row gap-2`}
+          className={`${className} flex flex-row gap-2 text-lg`}
         >
           <input
             type="text"

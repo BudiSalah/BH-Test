@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts';
 import { MainContext } from '../MainContext';
 import Section from '../UI/Section';
 
-function Graph() {
+function Graph({ className }) {
   const { question, answers, createPoll, votes } = useContext(MainContext);
 
   const [options, setOptions] = useState({
@@ -53,10 +53,13 @@ function Graph() {
   }, [answers, votes]);
 
   return (
-    <Section className="flex flex-col flex-wrap items-stretch justify-between gap-2">
+    <Section
+      className={`${className} flex flex-col flex-wrap items-stretch justify-between gap-2`}
+    >
       {createPoll && votes?.length > 0 ? (
         <>
           <h2>{question}</h2>
+
           <Chart options={options} series={series} type="bar" height={320} />
 
           <p className="capitalize">total votes: {totalVotes}</p>

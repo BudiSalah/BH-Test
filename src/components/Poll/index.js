@@ -4,11 +4,11 @@ import Section from '../UI/Section';
 import TextInput from '../units/TextInput';
 import AnswersSection from '../AnswersSection';
 
-function Poll() {
+function Poll({ className }) {
   const { question, setQuestion } = useContext(MainContext);
 
   return (
-    <Section className="flex flex-col flex-wrap items-stretch">
+    <Section className={`${className} flex flex-col flex-wrap items-stretch`}>
       <TextInput
         label="question"
         state={question}
