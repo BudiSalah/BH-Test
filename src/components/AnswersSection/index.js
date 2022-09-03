@@ -109,6 +109,12 @@ function AnswersSection({ className }) {
     if (answerInput.current) answerInput.current.disabled = question === '';
   }, [question]);
 
+  useEffect(() => {
+    if (answers?.length < 2) {
+      setCreatePoll(false);
+    }
+  }, [answers, setCreatePoll]);
+
   return (
     <div className={`${className} mt-8 flex flex-col gap-2`}>
       <h2>Answers</h2>
