@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { MainContext } from '../MainContext';
 import Section from '../UI/Section';
 import TextInput from '../units/TextInput';
+import AnswersSection from '../AnswersSection';
 
 function Poll() {
   const { question, setQuestion } = useContext(MainContext);
@@ -15,6 +16,8 @@ function Poll() {
         name="question-input"
         placeholder="Please enter your question..."
       />
+
+      <AnswersSection />
     </Section>
   );
 }
