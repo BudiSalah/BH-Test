@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h2 {
+    @apply text-2xl capitalize;
+  }
+
+  :disabled {
+    @apply opacity-50;
+  }
+
+  input:not(:focus) + span {
+    @apply hidden;
+  }
+}
+
+@layer components {
+  section label {
+    @apply text-2xl;
+  }
+}
